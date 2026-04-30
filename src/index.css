@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Zahi Mountain Shelter — Earthy Atlas Design System */
+
+@layer base {
+  :root {
+    /* Antique white background */
+    --background: 38 35% 95%;
+    --foreground: 30 25% 18%;
+
+    --card: 38 30% 97%;
+    --card-foreground: 30 25% 18%;
+
+    --popover: 38 35% 96%;
+    --popover-foreground: 30 25% 18%;
+
+    /* Olive green primary */
+    --primary: 78 22% 32%;
+    --primary-foreground: 38 35% 96%;
+    --primary-glow: 78 28% 42%;
+
+    /* Sandy brown secondary */
+    --secondary: 28 38% 78%;
+    --secondary-foreground: 28 40% 22%;
+
+    --muted: 35 22% 88%;
+    --muted-foreground: 30 18% 38%;
+
+    /* Terracotta accent */
+    --accent: 18 55% 52%;
+    --accent-foreground: 38 35% 96%;
+
+    /* Earth tones */
+    --earth: 28 40% 35%;
+    --earth-foreground: 38 35% 96%;
+    --sand: 32 45% 70%;
+    --olive: 78 22% 32%;
+    --olive-deep: 80 25% 22%;
+    --terracotta: 18 55% 52%;
+    --cream: 38 40% 92%;
+
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 38 35% 96%;
+
+    --border: 32 25% 80%;
+    --input: 32 25% 85%;
+    --ring: 78 22% 32%;
+
+    --radius: 0.75rem;
+
+    --gradient-mountain: linear-gradient(180deg, hsl(38 35% 95% / 0) 0%, hsl(28 40% 35% / 0.85) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(78 22% 32%) 0%, hsl(28 40% 35%) 100%);
+    --gradient-sunset: linear-gradient(135deg, hsl(18 55% 52%) 0%, hsl(32 60% 60%) 100%);
+    --gradient-cream: linear-gradient(180deg, hsl(38 40% 96%) 0%, hsl(35 30% 90%) 100%);
+
+    --shadow-warm: 0 20px 50px -20px hsl(28 40% 25% / 0.35);
+    --shadow-soft: 0 8px 30px -10px hsl(28 30% 30% / 0.18);
+    --shadow-card: 0 4px 20px -8px hsl(78 20% 25% / 0.22);
+
+    --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dark {
+    --background: 30 18% 10%;
+    --foreground: 38 25% 92%;
+    --card: 30 18% 13%;
+    --card-foreground: 38 25% 92%;
+    --popover: 30 18% 12%;
+    --popover-foreground: 38 25% 92%;
+    --primary: 78 28% 55%;
+    --primary-foreground: 30 18% 10%;
+    --secondary: 28 20% 22%;
+    --secondary-foreground: 38 25% 92%;
+    --muted: 30 15% 20%;
+    --muted-foreground: 35 15% 65%;
+    --accent: 18 55% 58%;
+    --accent-foreground: 30 18% 10%;
+    --border: 30 15% 22%;
+    --input: 30 15% 22%;
+    --ring: 78 28% 55%;
+  }
+
+  html[dir="rtl"] body {
+    font-family: 'Cairo', 'Amiri', system-ui, sans-serif;
+  }
+  html[dir="ltr"] body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(at 0% 0%, hsl(var(--secondary) / 0.3) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsl(var(--olive) / 0.08) 0px, transparent 50%);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Cairo', 'Cormorant Garamond', serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  html[dir="ltr"] h1, html[dir="ltr"] h2, html[dir="ltr"] h3 {
+    font-family: 'Cormorant Garamond', 'Cairo', serif;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-warm { background-image: var(--gradient-warm); }
+  .bg-gradient-sunset { background-image: var(--gradient-sunset); }
+  .bg-gradient-mountain { background-image: var(--gradient-mountain); }
+  .bg-gradient-cream { background-image: var(--gradient-cream); }
+  .shadow-warm { box-shadow: var(--shadow-warm); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .text-balance { text-wrap: balance; }
+
+  .pattern-zellige {
+    background-image:
+      radial-gradient(circle at 1px 1px, hsl(var(--olive) / 0.12) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+.animate-fade-up { animation: fade-up 0.8s var(--transition-smooth) both; }
