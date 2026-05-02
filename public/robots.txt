@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+sitemap: https://gitezahi.github.io/GiteAubergeZahiBouiblane/sitemap.xml
