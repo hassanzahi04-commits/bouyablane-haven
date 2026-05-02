@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useI18n } from "@/i18n/I18nContext";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import FsLightbox from "fslightbox-react";
 
-// قائمة الروابط المباشرة التي استخرجناها من ImgBB
 const images = [
   "https://i.ibb.co/jPsPHmgd/1.jpg", "https://i.ibb.co/WW3Q0kFs/2.jpg",
   "https://i.ibb.co/wZ3LsC2G/3.jpg", "https://i.ibb.co/nNt5HnZc/4.jpg",
@@ -43,7 +42,18 @@ const images = [
 
 export function Gallery() {
   const { t } = useI18n();
-  const [open, setOpen] = useState<string | null>(null);
+  // تحويل الحالة للتحكم في فتح المعرض وترقيم الصورة المختارة
+  const [lightboxController, setLightboxController] = useState({
+    toggler: false,
+    sourceIndex: 0
+  });
+
+  function openLightboxOnSource(index: number) {
+    setLightboxController({
+      toggler: !lightboxController.toggler,
+      sourceIndex: index
+    });
+  }
 
   return (
     <section id="gallery" className="py-20 bg-stone-50">
@@ -52,7 +62,7 @@ export function Gallery() {
           <span className="text-sm font-semibold tracking-widest uppercase text-terracotta">
             {t("gallery.kicker")}
           </span>
-          <h2 className="mt-4 text-4xl font-bold text-foreground">
+          <h2 className="mt-4 text-4xl font-bold text-foreground font-serif">
             {t("gallery.title")}
           </h2>
           <p className="mt-4 text-foreground/70 leading-relaxed">
@@ -60,39 +70,36 @@ export function Gallery() {
           </p>
         </div>
 
-        {/* شبكة الصور - عرض الصور مباشرة */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {images.map((url, i) => (
             <div 
               key={i}
               className={`relative overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer h-64 group
                 ${i % 9 === 0 ? "md:col-span-2 md:row-span-2 h-[512px]" : ""}`}
-              onClick={() => setOpen(url)}
+              onClick={() => openLightboxOnSource(i)}
             >
               <img
                 src={url}
-                alt={`Auberge Zahi ${i + 1}`}
+                alt={`Gîte Zahi Bouiblane ${i + 1}`}
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors" />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
+                 <span className="text-white border border-white/50 px-4 py-2 rounded-full backdrop-blur-sm text-sm">
+                   عرض الصور
+                 </span>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* نافذة التكبير عند الضغط */}
-      <Dialog open={!!open} onOpenChange={(v) => !v && setOpen(null)}>
-        <DialogContent className="max-w-4xl p-0 bg-transparent border-0">
-          {open && (
-            <img 
-              src={open} 
-              alt="View large" 
-              className="w-full h-auto rounded-lg shadow-2xl" 
-            />
-          )}
-        </DialogContent>
-      </Dialog>
-    </section>
+      {/* المكون السحري الذي يعرض كل الصور كألبوم متصل */}
+      <FsLightbox
+        toggler={lightboxController.toggler}
+        sources={images}
+        sourceIndex={lightboxController.sourceIndex}
+      />
+    </header>
   );
 }
