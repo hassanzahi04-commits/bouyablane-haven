@@ -1,6 +1,8 @@
 import { MapPin, Phone, Mail, CloudSun, Navigation } from "lucide-react";
+import { useI18n } from "@/i18n/I18nContext";
 
 export function ContactMap() {
+  const { t } = useI18n();
   // رابط المشاركة المباشر للمأوى على خرائط جوجل
   const googleMapsUrl = "https://maps.app.goo.gl/3wG2UuD9S3EwG8zY9"; 
 
@@ -12,10 +14,10 @@ export function ContactMap() {
             <MapPin className="size-8 text-olive" />
           </div>
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground font-serif">
-            موقعنا في قلب بويبلان
+            {t("contact.title") || "موقعنا في قلب بويبلان"}
           </h2>
           <p className="mt-4 text-muted-foreground italic">
-             دوار تامطروشت، جبل بويبلان - وجهتكم للهدوء والطبيعة الخام
+             {t("contact.address_full") || "دوار تامطروشت، جبل بويبلان - وجهتكم للهدوء والطبيعة الخام"}
           </p>
         </div>
 
@@ -24,7 +26,7 @@ export function ContactMap() {
           <div className="space-y-4">
             <div className="flex items-center justify-between mb-2">
               <h3 className="flex items-center gap-2 font-bold text-lg text-olive">
-                <MapPin className="size-5" /> موقع المأوى على الخريطة
+                <MapPin className="size-5" /> {t("contact.map_label") || "موقع المأوى على الخريطة"}
               </h3>
               <a 
                 href={googleMapsUrl}
@@ -32,7 +34,7 @@ export function ContactMap() {
                 rel="noopener noreferrer"
                 className="text-xs bg-olive text-white px-3 py-1 rounded-full flex items-center gap-1 hover:bg-olive/90 transition-all"
               >
-                <Navigation className="size-3" /> توجيهات الطريق
+                <Navigation className="size-3" /> {t("contact.directions") || "توجيهات الطريق"}
               </a>
             </div>
             <div className="rounded-3xl overflow-hidden shadow-xl h-[400px] border border-border bg-muted">
@@ -51,7 +53,7 @@ export function ContactMap() {
           {/* خريطة الطقس الحية - Windy */}
           <div className="space-y-4">
             <h3 className="flex items-center gap-2 font-bold text-lg text-olive mb-2">
-              <CloudSun className="size-5" /> حالة الطقس في بويبلان
+              <CloudSun className="size-5" /> {t("contact.weather_label") || "حالة الطقس في بويبلان"}
             </h3>
             <div className="rounded-3xl overflow-hidden shadow-xl h-[400px] border border-border bg-muted">
               <iframe 
@@ -72,7 +74,7 @@ export function ContactMap() {
               <Phone className="size-5 text-olive" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">اتصل بنا</p>
+              <p className="text-xs text-muted-foreground">{t("contact.call_us") || "اتصل بنا"}</p>
               <a href="tel:0673552963" className="font-bold text-foreground hover:text-olive transition-colors" dir="ltr">
                 0673552963
               </a>
@@ -84,8 +86,13 @@ export function ContactMap() {
               <Mail className="size-5 text-olive" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">البريد الإلكتروني</p>
-              <p className="font-bold text-foreground">contact@aubergezahi.com</p>
+              <p className="text-xs text-muted-foreground">{t("contact.email_label") || "البريد الإلكتروني"}</p>
+              <a 
+                href="mailto:aubergezahi@gmail.com" 
+                className="font-bold text-sm text-foreground hover:text-olive transition-colors break-all"
+              >
+                aubergezahi@gmail.com
+              </a>
             </div>
           </div>
 
@@ -99,8 +106,8 @@ export function ContactMap() {
               <MapPin className="size-5 text-olive" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">العنوان (انقر للخرائط)</p>
-              <p className="font-bold text-foreground text-sm">دوار تامطروشت، جبل بويبلان</p>
+              <p className="text-xs text-muted-foreground">{t("contact.address_label") || "العنوان (انقر للخرائط)"}</p>
+              <p className="font-bold text-foreground text-sm">{t("contact.location") || "دوار تامطروشت، جبل بويبلان"}</p>
             </div>
           </a>
         </div>
