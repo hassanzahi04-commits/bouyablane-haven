@@ -2,7 +2,15 @@ import { useState } from "react";
 import { useI18n } from "@/i18n/I18nContext";
 import FsLightbox from "fslightbox-react";
 
-// مصفوفة الصور (تأكد من بقائها كاملة كما هي لديك)
+// استيراد Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+// استيراد تنسيقات Swiper
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const images = [
   "https://i.ibb.co/jPsPHmgd/1.jpg", "https://i.ibb.co/WW3Q0kFs/2.jpg",
   "https://i.ibb.co/wZ3LsC2G/3.jpg", "https://i.ibb.co/nNt5HnZc/4.jpg",
@@ -52,9 +60,10 @@ export function Gallery() {
   }
 
   return (
-    <section id="gallery" className="py-16 bg-stone-50">
+    <section id="gallery" className="py-16 bg-stone-50 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mb-10">
+        {/* العناوين */}
+        <div className="max-w-3xl mb-10 mx-auto text-center">
           <span className="text-xs font-semibold tracking-widest uppercase text-terracotta">
             {t("gallery.kicker")}
           </span>
@@ -66,35 +75,71 @@ export function Gallery() {
           </p>
         </div>
 
-        {/* شبكة الصور المصغرة والذكية */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-          {images.map((url, i) => (
-            <div 
-              key={i}
-              className="relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer aspect-square group bg-stone-200"
-              onClick={() => openLightboxOnSource(i)}
-            >
-              <img
-                src={url}
-                alt={`Gîte Zahi Bouiblane ${i + 1}`}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-                 <span className="text-white text-[10px] bg-black/40 px-2 py-1 rounded-md backdrop-blur-sm">
-                   {t("common.view") || "تكبير"}
-                 </span>
-              </div>
-            </div>
-          ))}
+        {/* معرض الصور المتنقل (Swiper) */}
+        <div className="relative group max-w-5xl mx-auto">
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={15}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 3500, disableOnInteraction: false }}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="rounded-2xl shadow-xl overflow-hidden pb-12"
+          >
+            {images.map((url, i) => (
+              <SwiperSlide key={i}>
+                <div 
+                  className="relative overflow-hidden rounded-xl aspect-[4/5] cursor-pointer bg-stone-200 group/item"
+                  onClick={() => openLightboxOnSource(i)}
+                >
+                  <img
+                    src={url}
+                    alt={`Gîte Zahi Bouiblane ${i + 1}`}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover/item:scale-110"
+                  />
+                  {/* طبقة التظليل عند التمرير */}
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center">
+                     <span className="text-white text-xs bg-black/50 px-3 py-2 rounded-full backdrop-blur-md border border-white/20">
+                       {t("common.view") || "مشاهدة بملء الشاشة"}
+                     </span>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
 
+      {/* نافذة التكبير عند الضغط */}
       <FsLightbox
         toggler={toggler}
         sources={images}
         sourceIndex={sourceIndex}
       />
+
+      {/* تنسيقات مخصصة لأسهم Swiper لتناسب ألوان مأوى زاهي */}
+      <style>{`
+        .swiper-button-next, .swiper-button-prev {
+          color: #7c8a71 !important;
+          background: rgba(255, 255, 255, 0.8);
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          backdrop-filter: blur(4px);
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+          font-size: 18px !important;
+          font-weight: bold;
+        }
+        .swiper-pagination-bullet-active {
+          background: #7c8a71 !important;
+        }
+      `}</style>
     </section>
   );
 }
