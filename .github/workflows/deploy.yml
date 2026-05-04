@@ -20,7 +20,8 @@ jobs:
         with:
           node-version: 20
       - name: Install dependencies
-        run: npm install
+        # تم التعديل هنا لاستخدام force ليتجاوز تعارض النسخ
+        run: npm install --force
       - name: Build
         run: npm run build
       - name: Upload artifact
