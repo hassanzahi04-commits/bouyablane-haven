@@ -8,7 +8,7 @@ export function About() {
         <div className="lg:col-span-2 relative">
           <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-warm">
             <img
-              src="/images/bouiblane-summit.jpg"
+              src="images/bouiblane-summit.jpg"
               alt="قمة جبل بويبلان - دار الضيافة زاهي"
               width={1280}
               height={960}
@@ -16,7 +16,6 @@ export function About() {
               className="w-full h-full object-cover"
             />
           </div>
-          {/* البطاقة التي تحتوي على الارتفاع بقيت كما هي دون تغيير */}
           <div className="absolute -bottom-6 -end-6 lg:-end-10 w-32 lg:w-44 aspect-square rounded-2xl bg-gradient-warm shadow-warm grid place-items-center text-primary-foreground p-6">
             <div className="text-center">
               <div className="text-3xl lg:text-4xl font-bold">3192m</div>
