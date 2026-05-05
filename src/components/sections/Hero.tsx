@@ -21,7 +21,8 @@ export function Hero() {
         <div className="max-w-3xl mx-auto animate-fade-up flex flex-col items-center">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream/80 backdrop-blur border border-border text-xs lg:text-sm text-earth font-medium tracking-wide">
             <span className="size-1.5 rounded-full bg-terracotta" />
-            {t("hero.tag")}
+            {/* تم استبدال t("hero.tag") بالنص الجديد مباشرة لضمان الدقة */}
+             دار الضيافة زاهي بويبلان 
           </span>
           <h1 className="mt-6 text-4xl sm:text-5xl lg:text-7xl text-foreground text-balance leading-[1.1] font-serif font-normal text-center">
             {t("hero.title")}
@@ -47,7 +48,6 @@ export function Hero() {
               className="h-12 px-7 text-base bg-cream/70 backdrop-blur border-earth/30 hover:bg-cream"
             >
               <a href="#about">
-                {/* تم استبدال t("hero.scroll") بالنص المطلوب مباشرة */}
                 اكتشف ضيافتنا
                 <ArrowDown className="size-4" />
               </a>

@@ -54,11 +54,13 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="size-12 rounded-full bg-cream grid place-items-center overflow-hidden">
-                <img src={logo} alt="Gîte Zahi Bouiblane" className="w-full h-full object-contain" />
+                <img src={logo} alt="Dar Diafa Zahi Bouiblane" className="w-full h-full object-contain" />
               </span>
-              <span className="font-bold text-lg">مأوى زاهي بويبلان</span>
+              {/* تعديل الاسم بجانب الشعار */}
+              <span className="font-bold text-lg">دار الضيافة زاهي بويبلان</span>
             </div>
-            <p className="text-cream/70 text-sm leading-relaxed">{t("footer.tag")}</p>
+            {/* تعديل النص الفرعي للهوية الجديدة */}
+            <p className="text-cream/70 text-sm leading-relaxed">دار الضيافة زاهي بويبلان . المغرب</p>
           </div>
 
           <div>
@@ -93,7 +95,8 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-cream/10 text-center text-xs text-cream/60">
-          © {new Date().getFullYear()} Gîte Zahi Bouyablane · {t("footer.rights")}
+          {/* تصحيح كتابة Bouiblane بحرف i بدلاً من y */}
+          © {new Date().getFullYear()} Gîte Zahi Bouiblane · {t("footer.rights")}
         </div>
       </div>
     </footer>
