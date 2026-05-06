@@ -4,13 +4,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Play, Image as ImageIcon } from "lucide-react";
 
-// استيراد تنسيقات Swiper الضرورية
+// استيراد التنسيقات الأساسية لـ Swiper (ضرورية جداً لعمل السلايدر)
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const galleryItems = [
-  // --- الفيديوهات الجديدة ---
+  // الفيديوهات (تم دمج القائمة الكاملة)
   { type: "video", url: "https://www.youtube.com/watch?v=O9JwT1D3nEw", thumb: "https://img.youtube.com/vi/O9JwT1D3nEw/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=z30f0SxjbAY", thumb: "https://img.youtube.com/vi/z30f0SxjbAY/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=nfDGEt5oYL4", thumb: "https://img.youtube.com/vi/nfDGEt5oYL4/0.jpg" },
@@ -21,8 +21,6 @@ const galleryItems = [
   { type: "video", url: "https://www.youtube.com/watch?v=OtWRlvwQ17Y", thumb: "https://img.youtube.com/vi/OtWRlvwQ17Y/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=fiC56y5Iu8o", thumb: "https://img.youtube.com/vi/fiC56y5Iu8o/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=T-rjdMPsXN8", thumb: "https://img.youtube.com/vi/T-rjdMPsXN8/0.jpg" },
-
-  // --- قسم الفيديوهات السابقة ---
   { type: "video", url: "https://www.youtube.com/watch?v=pY8rcZUkVzk", thumb: "https://img.youtube.com/vi/pY8rcZUkVzk/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=7txF4u8WdI0", thumb: "https://img.youtube.com/vi/7txF4u8WdI0/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=0KitPyS7WpI", thumb: "https://img.youtube.com/vi/0KitPyS7WpI/0.jpg" },
@@ -40,7 +38,7 @@ const galleryItems = [
   { type: "video", url: "https://www.youtube.com/watch?v=9hvY_tg9zj4", thumb: "https://img.youtube.com/vi/9hvY_tg9zj4/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=wQHOMqyhnHc", thumb: "https://img.youtube.com/vi/wQHOMqyhnHc/0.jpg" },
 
-  // --- قسم الصور ---
+  // الصور الكاملة
   { type: "image", url: "https://i.ibb.co/jPsPHmgd/1.jpg", thumb: "https://i.ibb.co/jPsPHmgd/1.jpg" },
   { type: "image", url: "https://i.ibb.co/WW3Q0kFs/2.jpg", thumb: "https://i.ibb.co/WW3Q0kFs/2.jpg" },
   { type: "image", url: "https://i.ibb.co/wZ3LsC2G/3.jpg", thumb: "https://i.ibb.co/wZ3LsC2G/3.jpg" },
@@ -123,7 +121,13 @@ export const Gallery = () => {
   return (
     <section id="gallery" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 text-primary font-amiri">المعرض</h2>
+        {/* إعادة النص الوصفي */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-primary font-amiri mb-4">المعرض</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            اكتشف سحر الطبيعة في بويبلان من خلال مجموعتنا المختارة من الصور والفيديوهات التي توثق أجمل اللحظات في "مأوى زاهي".
+          </p>
+        </div>
         
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
@@ -131,31 +135,35 @@ export const Gallery = () => {
           slidesPerView={1}
           navigation={true}
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
           breakpoints={{
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
             1280: { slidesPerView: 4 },
           }}
-          className="pb-12 gallery-swiper"
+          className="pb-12"
         >
           {galleryItems.map((item, index) => (
             <SwiperSlide key={index}>
               <div
-                className="relative group cursor-pointer overflow-hidden rounded-xl aspect-video shadow-md border-2 border-white"
+                className="relative group cursor-pointer overflow-hidden rounded-xl aspect-video shadow-md border-4 border-white transition-all hover:border-secondary"
                 onClick={() => openLightboxOnSlide(index + 1)}
               >
                 <img
                   src={item.thumb}
-                  alt={`Gallery ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  alt={`Zahi Bouiblane Gallery - Item ${index + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   {item.type === "video" ? (
-                    <Play className="text-white w-10 h-10 fill-white" />
+                    <div className="bg-secondary p-3 rounded-full">
+                      <Play className="text-white w-8 h-8 fill-white" />
+                    </div>
                   ) : (
-                    <ImageIcon className="text-white w-10 h-10" />
+                    <div className="bg-white/20 p-3 rounded-full backdrop-blur-sm">
+                      <ImageIcon className="text-white w-8 h-8" />
+                    </div>
                   )}
                 </div>
               </div>
