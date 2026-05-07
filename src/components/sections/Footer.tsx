@@ -10,8 +10,12 @@ export function BookCTA() {
       <div className="absolute inset-0 pattern-zellige opacity-20" />
       <div className="container mx-auto px-4 lg:px-8 relative text-center max-w-3xl">
         <Mountain className="size-12 mx-auto mb-6 opacity-90" />
-        <h2 className="text-4xl lg:text-6xl font-bold text-balance">{t("book.title")}</h2>
-        <p className="mt-6 text-cream/90 text-lg lg:text-xl">{t("book.desc")}</p>
+        <h2 className="text-4xl lg:text-6xl font-bold text-balance">
+          {t("book.title")}
+        </h2>
+        <p className="mt-6 text-cream/90 text-lg lg:text-xl">
+          {t("book.desc")}
+        </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Button
             asChild
@@ -42,38 +46,44 @@ export function BookCTA() {
 
 export function Footer() {
   const { t } = useI18n();
+  
   const socials = [
     { icon: Facebook, href: "https://www.facebook.com/share/18X96gZgQ9/", label: "Facebook" },
-    { icon: Instagram, href: "https://www.instagram.com/gite.zahi.bouyablane?igsh=MTQ4dzczZDhhd2JsMQ==", label: "Instagram 1" },
-    { icon: Instagram, href: "https://www.instagram.com/zahi_bouyblane?igsh=czRwN2t1ODQ1ZHgw", label: "Instagram 2" },
+    { icon: Instagram, href: "https://www.instagram.com/gite.zahi.bouyablane?igsh=MTQ4dzczZDhhd2JsMQ==", label: "Instagram" },
+    { icon: Instagram, href: "https://www.instagram.com/zahi_bouyblane?igsh=czRwN2t1ODQ1ZHgw", label: "Instagram" },
   ];
+
   return (
     <footer className="bg-olive-deep text-cream/90 py-16">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-10">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="size-12 rounded-full bg-cream grid place-items-center overflow-hidden">
-                <img src={logo} alt="Dar Diafa Zahi Bouiblane" className="w-full h-full object-contain" />
+        <div className="grid md:grid-cols-3 gap-12">
+          {/* قسم الشعار والهوية */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <span className="size-14 rounded-full bg-white/90 p-1 grid place-items-center overflow-hidden shadow-sm">
+                <img src={logo} alt="Dar Al Diyafa Zahi" className="w-full h-full object-contain" />
               </span>
-              {/* تعديل الاسم بجانب الشعار */}
-              <span className="font-bold text-lg">دار الضيافة زاهي بويبلان</span>
+              <span className="font-bold text-xl font-amiri tracking-wide">
+                {t("footer.brandName") || "دار الضيافة زاهي"}
+              </span>
             </div>
-            {/* تعديل النص الفرعي للهوية الجديدة */}
-            <p className="text-cream/70 text-sm leading-relaxed">دار الضيافة زاهي بويبلان . المغرب</p>
+            <p className="text-cream/70 text-sm leading-relaxed max-w-xs italic">
+              {t("footer.tagline") || "أصالة الضيافة في قلب جبال بويبلان"}
+            </p>
           </div>
 
+          {/* روابط التواصل الاجتماعي */}
           <div>
-            <h4 className="font-semibold mb-4 text-cream">{t("footer.follow")}</h4>
-            <div className="flex gap-3">
-              {socials.map((s) => (
+            <h4 className="font-semibold mb-6 text-cream text-lg">{t("footer.follow")}</h4>
+            <div className="flex gap-4">
+              {socials.map((s, idx) => (
                 <a
-                  key={s.href}
+                  key={idx}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="size-11 rounded-xl bg-cream/10 hover:bg-terracotta hover:text-earth grid place-items-center transition-colors"
+                  className="size-12 rounded-2xl bg-cream/5 border border-cream/10 hover:bg-terracotta hover:text-earth grid place-items-center transition-all duration-300 hover:-translate-y-1"
                 >
                   <s.icon className="size-5" />
                 </a>
@@ -81,22 +91,34 @@ export function Footer() {
             </div>
           </div>
 
+          {/* معلومات التواصل السريع */}
           <div>
-            <h4 className="font-semibold mb-4 text-cream">{t("nav.book")}</h4>
-            <a
-              href="https://wa.me/212673552963"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-cream/80 hover:text-cream"
-            >
-              <MessageCircle className="size-4" /> 0673 55 29 63
-            </a>
+            <h4 className="font-semibold mb-6 text-cream text-lg">{t("nav.book")}</h4>
+            <div className="space-y-4">
+              <a
+                href="https://wa.me/212673552963"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-cream/80 hover:text-secondary transition-colors"
+              >
+                <MessageCircle className="size-5 text-secondary" /> 
+                <span dir="ltr">0673 55 29 63</span>
+              </a>
+              <p className="text-cream/60 text-sm">
+                {t("footer.location") || "تازة، جبل بويبلان، المغرب"}
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-cream/10 text-center text-xs text-cream/60">
-          {/* تصحيح كتابة Bouiblane بحرف i بدلاً من y */}
-          © {new Date().getFullYear()} Gîte Zahi Bouiblane · {t("footer.rights")}
+        {/* حقوق النشر */}
+        <div className="mt-16 pt-8 border-t border-cream/10 text-center text-sm text-cream/50">
+          <p>
+            © {new Date().getFullYear()} {t("footer.brandName")} · {t("footer.rights")}
+          </p>
+          <p className="mt-2 text-xs opacity-60">
+            Bouiblane, Taza, Morocco
+          </p>
         </div>
       </div>
     </footer>
@@ -110,10 +132,10 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp"
-      className="fixed bottom-6 end-6 z-40 size-14 lg:size-16 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] shadow-warm grid place-items-center text-white transition-transform hover:scale-110 animate-float-slow"
+      className="fixed bottom-6 right-6 z-50 size-14 lg:size-16 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] shadow-2xl grid place-items-center text-white transition-all duration-300 hover:scale-110 active:scale-95 animate-in fade-in zoom-in duration-500"
     >
-      <MessageCircle className="size-6 lg:size-7" />
-      <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20" />
+      <MessageCircle className="size-7 lg:size-8" />
+      <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25" />
     </a>
   );
 }

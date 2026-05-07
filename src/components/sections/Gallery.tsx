@@ -3,14 +3,15 @@ import FsLightbox from "fslightbox-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Play, Image as ImageIcon } from "lucide-react";
-import { useTranslation } from "react-i18next"; // استيراد نظام الترجمة
+import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+// مصفوفة العناصر (فيديوهات وصور)
 const galleryItems = [
-  // --- الفيديوهات (26) ---
+  // --- الفيديوهات ---
   { type: "video", url: "https://www.youtube.com/watch?v=O9JwT1D3nEw", thumb: "https://img.youtube.com/vi/O9JwT1D3nEw/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=z30f0SxjbAY", thumb: "https://img.youtube.com/vi/z30f0SxjbAY/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=nfDGEt5oYL4", thumb: "https://img.youtube.com/vi/nfDGEt5oYL4/0.jpg" },
@@ -38,7 +39,7 @@ const galleryItems = [
   { type: "video", url: "https://www.youtube.com/watch?v=9hvY_tg9zj4", thumb: "https://img.youtube.com/vi/9hvY_tg9zj4/0.jpg" },
   { type: "video", url: "https://www.youtube.com/watch?v=wQHOMqyhnHc", thumb: "https://img.youtube.com/vi/wQHOMqyhnHc/0.jpg" },
 
-  // --- الصور (60 صورة) ---
+  // --- الصور ---
   { type: "image", url: "https://i.ibb.co/jPsPHmgd/1.jpg", thumb: "https://i.ibb.co/jPsPHmgd/1.jpg" },
   { type: "image", url: "https://i.ibb.co/WW3Q0kFs/2.jpg", thumb: "https://i.ibb.co/WW3Q0kFs/2.jpg" },
   { type: "image", url: "https://i.ibb.co/wZ3LsC2G/3.jpg", thumb: "https://i.ibb.co/wZ3LsC2G/3.jpg" },
@@ -106,7 +107,7 @@ const galleryItems = [
 ];
 
 export const Gallery = () => {
-  const { t } = useTranslation(); // تفعيل دالة الترجمة
+  const { t } = useTranslation();
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
     slide: 1,
@@ -123,13 +124,17 @@ export const Gallery = () => {
     <section id="gallery" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          {/* تم ربط العنوان بالترجمة */}
+          {/* الكيكر (العنوان الصغير العلوي) */}
+          <span className="text-secondary font-semibold tracking-wider uppercase text-sm mb-2 block">
+            {t('gallery.kicker')}
+          </span>
+          {/* العنوان الرئيسي */}
           <h2 className="text-4xl font-bold text-primary font-amiri mb-4">
             {t('gallery.title')}
           </h2>
-          {/* تم ربط الوصف بالترجمة واستبدال "مأوى زاهي" باسم "دار الضيافة زاهي" في ملفات الترجمة */}
+          {/* الوصف المترجم */}
           <p className="text-gray-600 max-w-2xl mx-auto">
-            {t('gallery.description', { count: galleryItems.length })}
+            {t('gallery.desc')}
           </p>
         </div>
         
@@ -155,7 +160,7 @@ export const Gallery = () => {
               >
                 <img
                   src={item.thumb}
-                  alt={`Zahi Bouiblane Gallery - ${index + 1}`}
+                  alt={`Gallery ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                 />

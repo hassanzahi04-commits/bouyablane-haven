@@ -5,11 +5,12 @@ import hero from "@/assets/hero-mountain.jpg";
 
 export function Hero() {
   const { t } = useI18n();
+  
   return (
     <section id="top" className="relative min-h-[100svh] flex items-end overflow-hidden">
       <img
         src={hero}
-        alt="جبل بويبلان عند الغروب"
+        alt={t("hero.imageAlt")} // جعل وصف الصورة قابلاً للترجمة أيضاً
         width={1920}
         height={1280}
         className="absolute inset-0 w-full h-full object-cover scale-105"
@@ -21,16 +22,20 @@ export function Hero() {
         <div className="max-w-3xl mx-auto animate-fade-up flex flex-col items-center">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream/80 backdrop-blur border border-border text-xs lg:text-sm text-earth font-medium tracking-wide">
             <span className="size-1.5 rounded-full bg-terracotta" />
-            {/* تم استبدال t("hero.tag") بالنص الجديد مباشرة لضمان الدقة */}
-             دار الضيافة زاهي بويبلان 
+            {/* تم ربط التاج بالترجمة الآن */}
+            {t("hero.tag")} 
           </span>
+          
           <h1 className="mt-6 text-4xl sm:text-5xl lg:text-7xl text-foreground text-balance leading-[1.1] font-serif font-normal text-center">
             {t("hero.title")}
           </h1>
-          <p className="mt-6 text-base lg:text-xl text-foreground/80 max-w-2xl leading-relaxed">
+          
+          <p className="mt-6 text-base lg:text-xl text-foreground/80 max-w-2xl leading-relaxed text-center">
             {t("hero.subtitle")}
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            {/* زر واتساب */}
             <Button
               asChild
               size="lg"
@@ -41,6 +46,8 @@ export function Hero() {
                 {t("hero.cta")}
               </a>
             </Button>
+            
+            {/* زر اكتشف ضيافتنا - تم ربطه بالترجمة هنا */}
             <Button
               asChild
               variant="outline"
@@ -48,7 +55,7 @@ export function Hero() {
               className="h-12 px-7 text-base bg-cream/70 backdrop-blur border-earth/30 hover:bg-cream"
             >
               <a href="#about">
-                اكتشف ضيافتنا
+                {t("hero.discover")}
                 <ArrowDown className="size-4" />
               </a>
             </Button>
