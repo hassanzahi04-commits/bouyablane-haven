@@ -1,8 +1,8 @@
 import { BookOpen, Star } from "lucide-react";
-import { useTranslation } from "react-i18next"; // استيراد نظام الترجمة
+import { useI18n } from "../../i18n/I18nContext"; // استيراد نظام الترجمة
 
 export function QuranSection() {
-  const { t } = useTranslation(); // تفعيل دالة الترجمة
+  const { t } =useI18n (); // تفعيل دالة الترجمة
 
   return (
     <section id="quran" className="py-24 bg-white">
