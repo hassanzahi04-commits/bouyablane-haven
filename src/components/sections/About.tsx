@@ -1,59 +1,37 @@
-import React from 'react';
-import { useI18n } from '@/i18n/I18nContext'; // استدعاء نظام الترجمة الخاص بك
-import aboutImage from '../../assets/group.jpg'; 
-import { Mountain } from 'lucide-react'; // استيراد أيقونة الجبل
+import { useI18n } from "../../i18n/I18nContext";
+import { Mountain } from "lucide-react"; // استيراد الأيقونة
 
 export const About = () => {
-  const { t, language } = useI18n(); // الحصول على اللغة الحالية ودالة الترجمة
-
-  // تحديد اتجاه النص بناءً على اللغة
-  const isRTL = language === 'ar';
+  const { t } = useI18n();
 
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-20">
       <div className="container mx-auto px-4">
-        <div className={`flex flex-col lg:flex-row items-center gap-12 ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
-          
-          {/* الجانب الخاص بالصورة مع أيقونة الارتفاع */}
-          <div className="lg:w-1/2 w-full">
-            <div className="relative">
-              <img 
-                src={aboutImage} 
-                alt="Gîte Auberge Zahi" 
-                className="rounded-lg shadow-2xl w-full h-[450px] object-cover"
-              />
-              {/* الأيقونة التي كانت تحت الصورة - ارتفاع الجبل */}
-              <div className={`absolute -bottom-6 ${isRTL ? '-left-6' : '-right-6'} bg-[#8B4513] text-white p-4 rounded-lg flex items-center gap-3 shadow-lg`}>
-                <Mountain size={32} />
-                <div>
-                  <p className="text-xs opacity-80">Alt.</p>
-                  <p className="font-bold">3192m</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* الجانب الخاص بالنصوص */}
-          <div className={`lg:w-1/2 w-full ${isRTL ? 'text-right' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'}>
-            {/* عنوان "من نحن" باللون البني كما طلبت */}
-            <h2 className="text-3xl font-bold mb-6 text-[#8B4513]">
-              {t('about.title')}
-            </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            {/* إعادة عبارة من نحن */}
+            <span className="text-primary font-bold tracking-wider uppercase mb-2 block">
+              {t('about.kicker')}
+            </span>
             
-            <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
-              {/* النص الوصفي الكامل - سيتحول آلياً عند تغيير اللغة */}
-              <p>
-                {t('about.description1')}
-              </p>
-              <p>
-                {t('about.description2')}
-              </p>
-              <p>
-                {t('about.description3')}
-              </p>
+            <h2 className="text-4xl font-bold mb-6">{t('about.title')}</h2>
+            
+            <div className="space-y-4 text-lg text-muted-foreground">
+              <p>{t('about.p1')}</p>
+              <p>{t('about.p2')}</p>
+              <p>{t('about.p3')}</p>
+            </div>
+
+            {/* إعادة أيقونة الجبل والارتفاع */}
+            <div className="mt-8 flex items-center gap-4 text-primary">
+              <Mountain className="w-8 h-8" />
+              <span className="text-2xl font-bold">3192m</span>
             </div>
           </div>
 
+          <div className="rounded-2xl overflow-hidden shadow-xl">
+             <img src="/bouiblane-summit.jpg" alt={t('hero.imageAlt')} className="w-full h-full object-cover" />
+          </div>
         </div>
       </div>
     </section>
