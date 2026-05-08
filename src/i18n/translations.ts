@@ -345,3 +345,4 @@ es: {
     "footer.brandName": "Zahi Gästehaus",
     "footer.rights": "Alle Rechte vorbehalten"
   }
+ }; 
