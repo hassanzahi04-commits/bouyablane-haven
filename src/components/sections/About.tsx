@@ -40,7 +40,7 @@ export const About = () => {
           {/* الصورة الجانبية - تم إصلاح المسار هنا */}
           <div className="order-1 md:order-2 rounded-2xl overflow-hidden shadow-2xl border-8 border-white group">
              <img 
-              src="/images/bouiblane-summit.jpg"
+              src="/GiteAubergeZahiBouiblane/images/bouiblane-summit.jpg"
                alt="Bouiblane Mountain Summit" 
                className="w-full h-[300px] md:h-[500px] object-cover group-hover:scale-105 transition-transform duration-700" 
              />
