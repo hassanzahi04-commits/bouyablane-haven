@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import react, { useState } from "react";
 import FsLightbox from "fslightbox-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
+import "swiper/css/pagination"
 
 // مصفوفة العناصر (فيديوهات وصور)
 const galleryItems = [
